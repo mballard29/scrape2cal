@@ -1,0 +1,12 @@
+credentials.json
+token.json
+.vscode/*
+*/__pycache__/*
+.DS_Store
+env/
+pyvenv.cfg
+reference/attrib_output.txt
+reference/calendarList.json
+reference/events.json
+reference/quickstart.py
+reference/source.html
