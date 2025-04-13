@@ -39,8 +39,8 @@ def scrape(src_path):
       end = [int(x) for x in end]
 
       # datetime.datetime.now(tz=datetime.timezone.utc).isoformat()
-      start_time = datetime(date[2], date[0], date[1], start[0], start[1], 0, tzinfo=timezone('America/New_York')).isoformat()
-      end_time = datetime(date[2], date[0], date[1], end[0], end[1], 0, tzinfo=timezone('America/New_York')).isoformat()
+      start_time = timezone('America/New_York').localize((datetime(date[2], date[0], date[1], start[0], start[1], 0))).isoformat()
+      end_time = timezone('America/New_York').localize((datetime(date[2], date[0], date[1], end[0], end[1], 0))).isoformat()
 
       body_para = e.find('div', class_='description')
       for i, c in enumerate(body_para.children):

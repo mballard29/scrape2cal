@@ -61,7 +61,7 @@ def import_events(CREDS, my_events, cal_id):
     for e in my_events:
       event = {
         'summary': e['summary'],
-        "colorId": "10",
+        "colorId": "2",
         'description': e['description'],
         'start': {
           'dateTime': e['start'],
@@ -86,8 +86,12 @@ def import_events_color(CREDS, my_events, cal_id, color):
         'summary': e['summary'],
         "colorId": str(color),
         'description': e['description'],
-        'start': {'date': e['start']},
-        'end': {'date': e['end']}
+        'start': {
+          'dateTime': e['start'],
+        },
+        'end': {
+          'dateTime': e['end'],
+        }
       }
       event = service.events().insert(calendarId=cal_id, body=event).execute()
       print('Event created: %s' % (event.get('htmlLink')))

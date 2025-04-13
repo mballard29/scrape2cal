@@ -1,4 +1,4 @@
-from controllers.calendar_utilities import create_token, get_my_calendars, import_events
+from controllers.calendar_utilities import create_token, get_my_calendars, import_events, import_events_color
 from controllers.scraping_bonus_sessions import scrape
 
 CREDS = None
@@ -19,7 +19,7 @@ def main():
   src_path = 'reference/source.html'
   my_events = scrape(src_path)
 
-  import_events(CREDS, my_events, my_calendars[item]['id'])
+  import_events_color(CREDS, my_events, my_calendars[item]['id'], 1)
   # import_events(<credentials, <list of dictionaries of events>, <id of target calendar>)
   # import_events_color("", "", "", <color id of color to make imported event(s)>)
 
