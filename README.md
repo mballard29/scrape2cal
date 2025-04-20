@@ -15,4 +15,4 @@ If given an event agenda online, and you want to add the items to Google calenda
 7) create python virtual environment
 8) download/ --upgrade packages: `python3 -m pip install -r requirements.txt`
    - as I was building, I would add the needed pack to requirements and rerun command to make sure it was properly added to the python environment/interpreter in vscode
-9)  use Google documentation to create program (they have errors, so debug and fix to make work)
+9) use Google documentation to create program (they have errors, so debug and fix to make work)
