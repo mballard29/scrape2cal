@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from pytz import timezone
 
-def convert24(time):
+def convert12to24(time):
   t = datetime.strptime(time, '%I:%M%p')
   return t.strftime('%H:%M')
 
@@ -31,8 +31,8 @@ def scrape(src_path):
 
       # start, end = [HH, MM]
       time = [x.upper().strip() for x in time.split('–')[0:2]]
-      start = convert24(time[0]).split(':')
-      end = convert24(time[1].split()[0].strip()).split(':')
+      start = convert12to24(time[0]).split(':')
+      end = convert12to24(time[1].split()[0].strip()).split(':')
 
       date = [int(x) for x in date]
       start = [int(x) for x in start]
@@ -52,6 +52,7 @@ def scrape(src_path):
       
       add_events.append({
         'summary': title,
+        'location': '',
         'description': description,
         'start': start_time,
         'end': end_time

@@ -12,9 +12,8 @@ SCOPES = [
   "https://www.googleapis.com/auth/calendar.events.owned"
 ]
 
-CREDS = None
-
 def create_token():
+  CREDS = None
   if os.path.exists("token.json"):
     CREDS = Credentials.from_authorized_user_file("token.json", SCOPES)
   if not CREDS or not CREDS.valid:
@@ -62,6 +61,7 @@ def import_events(CREDS, my_events, cal_id):
       event = {
         'summary': e['summary'],
         "colorId": "2",
+        'location': e['location'],
         'description': e['description'],
         'start': {
           'dateTime': e['start'],

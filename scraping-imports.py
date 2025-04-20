@@ -1,5 +1,6 @@
 from controllers.calendar_utilities import create_token, get_my_calendars, import_events, import_events_color
 from controllers.scraping_bonus_sessions import scrape
+from controllers.read_text import from_text
 
 CREDS = None
 
@@ -16,11 +17,17 @@ def main():
   item = int(input("Enter the number of the calendar you would like to add events to: "))
   print('Importing to: ', my_calendars[item]['summary'])
   
-  src_path = 'reference/source.html'
-  my_events = scrape(src_path)
+  # web scraping example
+  # src_path = 'reference/source.html'
+  # my_events = scrape(src_path)
 
-  import_events_color(CREDS, my_events, my_calendars[item]['id'], 1)
+  # get import event data from textfile
+  src_path = 'reference/coachella-w2-lineup.txt'
+  my_events = from_text(src_path)
+
+  import_events(CREDS, my_events, my_calendars[item]['id'])
   # import_events(<credentials, <list of dictionaries of events>, <id of target calendar>)
+  # import_events_color(CREDS, my_events, my_calendars[item]['id'], 1)
   # import_events_color("", "", "", <color id of color to make imported event(s)>)
 
 
