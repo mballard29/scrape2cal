@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import requests
 from datetime import datetime
 from pytz import timezone
 
@@ -6,7 +7,11 @@ def convert12to24(time):
   t = datetime.strptime(time, '%I:%M%p')
   return t.strftime('%H:%M')
 
-def scrape(src_path):
+# implement scraping static pages
+def scrape(link):
+  pass
+
+def dynamic_scrape(src_path):
   add_events = []
   with open(src_path, 'r') as inf:
     soup = BeautifulSoup(inf, "html.parser")

@@ -39,7 +39,6 @@ def get_my_calendars(CREDS):
     while True:
       calendar_list = service.calendarList().list(pageToken=page_token).execute()
       for i, c in enumerate([calendar_list_entry for calendar_list_entry in calendar_list['items'] if calendar_list_entry['accessRole'] == "owner"]):
-        my_calendars[i+1] = [c['id'], c['summary']]
         my_calendars[i+1] = {
           'id': c['id'], 
           'summary': c['summary']
@@ -60,7 +59,6 @@ def import_events(CREDS, my_events, cal_id):
     for e in my_events:
       event = {
         'summary': e['summary'],
-        "colorId": "2",
         'location': e['location'],
         'description': e['description'],
         'start': {
@@ -76,6 +74,27 @@ def import_events(CREDS, my_events, cal_id):
   except HttpError as error:
     print(f"{error}")
 
+def import_allday_events(CREDS, my_events, cal_id):
+  try:
+    service = build("calendar", "v3", credentials=CREDS)
+
+    for e in my_events:
+      event = {
+        'summary': e['summary'],
+        'location': e['location'],
+        'description': e['description'],
+        'start': {
+          'date': e['start'],
+        },
+        'end': {
+          'date': e['end'],
+        }
+      }
+      event = service.events().insert(calendarId=cal_id, body=event).execute()
+      print('Event created: %s' % (event.get('htmlLink')))
+    print(f'IMPORTED {len(my_events)} events to {cal_id} calendar.')
+  except HttpError as error:
+    print(f"{error}")
 
 def import_events_color(CREDS, my_events, cal_id, color):
   try:
