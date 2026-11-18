@@ -1,7 +1,25 @@
 import csv
 from datetime import datetime
 
-def from_csv(src_path, count):
+# INPUT: Event Name, Location, Description, Start Date Time (YYYY-MM-DD), End Date Time (YYYY-MM-DD)
+def from_csv(src_path):
+    add_events = []
+
+    with open(src_path, 'rt') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in list(csv_reader)[1:]:
+            add_events.append({
+                'summary': row[0],
+                'location': row[1],
+                'description': row[2],
+                'start': datetime(row[3]).strptime(r"%Y-%m-%d"),
+                'end': datetime(row[4]).strptime(r"%Y-%m-%d"),
+            })
+    return add_events
+
+# INPUT: Event Name, Day
+# PARAMS: FILE PATH, NUM OF MONTH OUT FROM THIS MONTH
+def from_csv_nth(src_path, count):
     add_events = []
     this_mo = int(datetime.today().strftime("%m"))
     this_year = int(datetime.today().strftime("%Y"))
@@ -21,3 +39,4 @@ def from_csv(src_path, count):
                         'end': datetime(this_year, this_mo+i, int(row[1])).strftime(r"%Y-%m-%d"),
                     })
     return add_events
+

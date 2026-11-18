@@ -32,6 +32,10 @@ def main():
   # my_events = from_text(src_path)
 
   # add bills - repeated events occurring on the same date every month
+  # src_path = 'reference/events.csv'
+  # my_events = from_csv_nth(src_path, count=10)
+
+  # from csv - all day events
   src_path = 'reference/events.csv'
   my_events = from_csv(src_path, count=10)
 
